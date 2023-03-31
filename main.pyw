@@ -4,11 +4,17 @@
 from tkinter import *
 from tkinter import ttk # Módulo de TKinter que proporciona widgets con aspecto más "moderno".
 from tkinter import messagebox # Módulo de TKinter que permite mostrar ventanas con mensajes de error para manejar errores
+from ttkthemes import ThemedTk
+import platform
 
 # Permite inicializar la ventana principal del programa
-root = Tk()
+if platform.system() == "Windows":
+    root = Tk()
+elif platform.system() == "Linux":
+    root = ThemedTk(theme="arc")
+
 root.title("Calculadora")
-root.iconbitmap("./icons/icon.ico")
+# root.iconbitmap("./icons/icon.ico")
 
 # Entry box
 entry = ttk.Entry(root, font=("Arial", 17))
@@ -77,9 +83,13 @@ def clear():
     operator = ""
 
 # Font style
-style = ttk.Style()
-style.configure("style.TButton", font=('Arial', 16), padding=(-30, 25))
-style.map("style.TButton", border=[("active", 10)])
+if platform.system() == "Windows":
+    style = ttk.Style()
+    style.configure("style.TButton", font=('Arial', 16), padding=(-30, 25))
+
+elif platform.system() == "Linux":
+    style = ttk.Style()
+    style.configure("style.TButton", font=('Arial', 16), padding=(-25, 25))
 
 ## Define buttons
 # First row
